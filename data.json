@@ -1,0 +1,36 @@
+[{
+        "no": "1",
+        "matakuliah": "Pemrograman Berbasis Bahasa Tubuh",
+        "kelas-dosen": "A-Krishna Putra,STMJ",
+        "sks": "3",
+        "kuota":"20"
+    },
+    {
+        "no": "2",
+        "matakuliah": "Interaksi Manusia Sesama Jenis",
+        "kelas-dosen": "Danang K.Y.A.S.U",
+        "sks": "2",
+        "kuota":"20"
+    },
+    {
+        "no": "3",
+        "matakuliah": "Desain Kreativitas Menjadi Tampan",
+        "kelas-dosen": "Babang Tampan Harris",
+        "sks": "3",
+        "kuota":"20"
+    },
+    {
+        "no": "4",
+        "matakuliah": "Rahasia Langit Ke 7",
+        "kelas-dosen": "Ir. Cabul Lumayan Tobat",
+        "sks":"3",
+        "kuota":"20"
+    },
+    {
+        "no": "5",
+        "matakuliah": "Cinta Yang Tak Direstui Orang Tua",
+        "kelas-dosen": "Drs. Aura Negatif",
+        "sks":"3",
+        "kuota":"20"
+    }
+]
