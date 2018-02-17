@@ -9,10 +9,13 @@ angular.module('scotchApp')
 .controller('TablesController', function($scope, DTOptionsBuilder, DTColumnBuilder) {
     $scope.message = 'Look! I am an about page.';
     var vm = this;
+    let hubUrl = 'http://localhost:5002/kapasitas';
+    let httpConnection = new signalR.HttpConnection(hubUrl);
+    let hubConnection = new signalR.HubConnection(httpConnection);
+    hubConnection.start();
     vm.selected = {};
     vm.selectAll = false;
     vm.toggleOne = toggleOne;
-
     vm.dtOptions = DTOptionsBuilder.fromSource('data.json')
         .withDOM('frtip')
         .withPaginationType('full_numbers')
@@ -36,7 +39,7 @@ angular.module('scotchApp')
         DTColumnBuilder.newColumn(null).withTitle('Pilih').notSortable()
             .renderWith(function(data, type, full, meta) {
                 vm.selected[full.no] = false;
-                return '<label class="switch"><input type="checkbox" ng-model="tables.selected[' + data.no + ']" ng-click="tables.toggleOne(tables.selected)"><span class="slider round"></span></label>';
+                return '<label class="switch"><input type="checkbox" ng-model="tables.selected[' + data.no + ']" ng-click="tables.Kirim()"><span class="slider round"></span></label>';
             }),
         DTColumnBuilder.newColumn('no').withTitle('No.'),
         DTColumnBuilder.newColumn('matakuliah').withTitle('Mata Kuliah'),
@@ -44,8 +47,6 @@ angular.module('scotchApp')
         DTColumnBuilder.newColumn('sks').withTitle('SKS'),
         DTColumnBuilder.newColumn('kuota').withTitle('Kuota')
     ];
-
-    
     function toggleOne (selectedItems) {
         for (var no in selectedItems) {
             if (selectedItems.hasOwnProperty(no)) {
@@ -57,6 +58,7 @@ angular.module('scotchApp')
         }
         vm.selectAll = true;
     }
+    
 
 });
 
