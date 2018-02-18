@@ -16,6 +16,7 @@ angular.module('scotchApp')
     vm.dtOptions = DTOptionsBuilder.fromSource('data.json')
         .withDOM('frtip')
         .withPaginationType('full_numbers')
+        .withOption('scrollX','100%')
         // Active Buttons extension
         .withButtons([
             'columnsToggle',
