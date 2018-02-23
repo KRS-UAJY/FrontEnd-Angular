@@ -4,6 +4,13 @@ angular.module('scotchApp')
     .controller('mainController', function($scope) {
         // create a message to display in our view
         $scope.message = 'Everyone come and see how good I look!';
+        var self = this;
+        self.Login = Login;
+        
+
+        function Login() {
+            console.log('Login');
+        }
     })
 
 .controller('TablesController', function($compile, $scope, DTOptionsBuilder, DTColumnBuilder) {

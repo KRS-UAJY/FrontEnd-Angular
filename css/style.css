@@ -5035,7 +5035,7 @@ footer#footer.footer-style-2 {
 /*-- PROFILE FEATURE --*/
 .profile-feature {
   position: relative;
-  padding-top: 95px;
+  padding-top: 35px;
   padding-bottom: 20px;
   z-index: 9;
 }
@@ -8512,3 +8512,12 @@ footer#footer.footer-style-2 {
   }
 
 /* END TOOGLE STYLE */
+
+.pemaksaan-row {
+  margin-right: 0px!important;
+  margin-left: 0px!important;
+}
+
+.pemaksaan-navbar {
+  border-radius: 0px!important;
+}

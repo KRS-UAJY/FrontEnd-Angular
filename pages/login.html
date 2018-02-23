@@ -4,21 +4,26 @@
     <div class="awe-overlay"></div>
     <div class="container">
         <div class="row">
-
             <!-- FORM -->
             <div class="col-xs-12 col-lg-4 pull-right">
                 <div class="form-login">
-                    <form>
+                    <form name="form" ng-submit="form.$valid && SebuahLogin.login()" novalidate>
                         <h2 class="text-uppercase">SIGN IN</h2>
-                        <div class="form-email">
-                            <input type="text" placeholder="NPM" required="">
+                        <div class="form-email" ng-class="{ 'has-error': form.$submitted && form.username.$invalid }">
+                            <input type="text" placeholder="NPM" name="username" class="form-control" ng-model="SebuahLogin.username" required="">
+                            <div ng-messages="form.$submitted && form.username.$error" class="help-block">
+                                <div ng-message="required">NPM is required</div>
                         </div>
-                        <div class="form-password">
-                            <input type="password" placeholder="Password" required="">
+                        <div class="form-password" ng-class="{ 'has-error': form.$submitted && form.password.$invalid }">
+                            <input type="password" placeholder="Password" name="password" class="form-control" ng-model="SebuahLogin.password" required="">
+                            <div ng-messages="form.$submitted && form.password.$error" class="help-block">
+                                <div ng-message="required">Password is required</div>
                         </div>
                         <div class="form-submit-1">
-                            <a href="profile.html" class="mc-btn btn-style-1">Sign In</a>
+                            <button class="mc-btn btn-style-1" ng-disabled="vm.loading">Sign In</button>
+                            <img ng-if="vm.loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                         </div>
+                        <div ng-if="vm.error" class="alert alert-danger">{{vm.error}}</div>
                     </form>
                 </div>
             </div>
