@@ -21,6 +21,9 @@
 		.when('/jadwal', {
 			templateUrl: 'pages/jadwal.html',
 		})
+		.when('/timetable', {
+			templateUrl: 'pages/timetable.html',
+		})
 
 	    // route for the contact page
 	    // .when('/contact', {
