@@ -18,11 +18,11 @@
 	        controller: 'TablesController',
 	        controllerAs: 'tables'
 		})
-		.when('/jadwal', {
-			templateUrl: 'pages/jadwal.html',
+		.when('/jadwal-ujian', {
+			templateUrl: 'pages/jadwal-ujian.html',
 		})
-		.when('/timetable', {
-			templateUrl: 'pages/timetable.html',
+		.when('/jadwal-kuliah', {
+			templateUrl: 'pages/jadwal-kuliah.html',
 		})
 
 	    // route for the contact page

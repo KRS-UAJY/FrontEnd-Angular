@@ -1,79 +1,9 @@
-<!-- HEADER -->
-<nav class="pemaksaan-navbar navbar navbar-inverse">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">KRS ONLINE UAJY</a>
-      </div>
-  
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class=""><a href="#">Semester 1 <span class="sr-only">(current)</span></a></li>
-          <li class=""><a href="#">Semester 2<span class="sr-only">(current)</span></a></li>
-          <li class=""><a href="#">Semester 3<span class="sr-only">(current)</span></a></li>
-          <li class=""><a href="#">Semester 4<span class="sr-only">(current)</span></a></li>
-          <li class=""><a href="#">Semester 5<span class="sr-only">(current)</span></a></li>
-          <li class=""><a href="#">Semester 6<span class="sr-only">(current)</span></a></li>
-          <li class=""><a href="#">Semester 7<span class="sr-only">(current)</span></a></li>
-          <li class=""><a href="#">Semester 8<span class="sr-only">(current)</span></a></li>
-          <li class=""><a href="#">Jadwal Kuliah<span class="sr-only">(current)</span></a></li>
-          <li class=""><a href="#">Jadwal Ujian<span class="sr-only">(current)</span></a></li>
-        </ul>
-        
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-  
-<!-- END / HEADER -->
+<div ng-include="'pages/components/header.html'"></div>
+<div ng-include="'pages/components/profile.html'"></div>
 
-<!-- PROFILE FEATURE -->
-<section class="profile-feature">
-    <div class="awe-parallax bg-profile-feature"></div>
-    <div class="awe-overlay overlay-color-3"></div>
-    <div class="container">
-        <div class="info-author">
-            <div class="image">
-                <img src="images/team-13.jpg" alt="">
-            </div>    
-            <div class="name-author">
-                <h2 class="big">Andrew Napitupulu</h2>
-            </div>     
-            <div class="address-author">
-                <i class="fa fa-ticket"></i>
-                <h3>Jatah sks : </h3>
-                <h3>24</h3>
-            </div>
-        </div>
-        <div class="info-follow">
-            <div class="trophies">
-                <span>Teknologi Industri</span>
-                <p>Fakultas</p>
-            </div>
-            <div class="trophies">
-                <span>Teknik Informatika</span>
-                <p>Prodi</p>
-            </div>
-            <div class="trophies">
-                <span>140707810</span>
-                <p>NPM</p>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- END / PROFILE FEATURE -->
-
-<div class="jumbotron text-center">
-    <h1>About Tables Page</h1>
-
-    <p>{{ message }}</p>
-</div>
+<div class="clock container" style="margin:2em;"></div>
+    <div class="message"></div>
+    <script src="vendor/flipclock/setflipclock.js"></script>
 
 <div class="row pemaksaan-row">
     <div class="col-md-12">
@@ -81,4 +11,8 @@
 
         </table>
     </div>
+</div>
+
+<div>
+    <a id='reset' href="#/home">Submit KRS</a>
 </div>
