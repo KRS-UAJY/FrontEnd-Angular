@@ -5,7 +5,7 @@
         .module('scotchApp')
         .controller('LoginController', Controller);
 
-    function Controller($location, AuthenticationService) {
+    function Controller($location, AuthenticationService,$scope) {
         var vm = this;
 
         vm.login = login;
@@ -26,7 +26,8 @@
 
                 console.log(result);
                 if (result === true) {
-                    $location.path('/tables');
+                    $location.url("/tables");
+                    $scope.$apply();
                 } else {
                     vm.error = 'Username or password is incorrect';
                     vm.loading = false;

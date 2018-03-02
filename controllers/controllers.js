@@ -13,11 +13,14 @@ angular.module('scotchApp')
         }
     })
 
-.controller('TablesController', function($compile, $scope, DTOptionsBuilder, DTColumnBuilder) {
+.controller('TablesController', function($compile, $scope,$localStorage, DTOptionsBuilder, DTColumnBuilder) {
     $scope.message = 'Look! I am an about page.';
+    console.log($localStorage.currentUser.username);
+    setdatamhs ();
+    var foto;
     var vm = this;
     var table = $('#tabel').DataTable();
-    let hubUrl = 'http://localhost:5001/kapasitas';
+    let hubUrl = 'http://127.0.0.1:34561/kapasitas';
     let httpConnection = new signalR.HttpConnection(hubUrl);
     let hubConnection = new signalR.HubConnection(httpConnection);
     hubConnection.start();
@@ -28,10 +31,10 @@ angular.module('scotchApp')
     .newOptions()
     .withOption('ajax', {
         headers: {
-            Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMTAxMTM3NTUiLCJqdGkiOiIzZmM3ZmEwNC05YjBlLTQ2ZjAtYmVkMS00NjU3OTQ2ZGJkYmEiLCJuYmYiOjE1MTg5Mzg2MDcsImV4cCI6MTUxODk0OTQwNywiaXNzIjoiQXV0aC5TZXJ2aWNlcyIsImF1ZCI6IktSUyBTZXJ2aWNlcyJ9.SurWFX7jlkOSDH8Orwl0X07ly4L4-pQtPUfffznMyMA'
+            Authorization: 'Bearer ' + $localStorage.currentUser.token
             },
         dataSrc: '',
-        url: 'http://localhost:5003/api/kelas/02',
+        url: 'http://127.0.0.1:34563/api/kelas/'+$localStorage.currentUser.prodi,
         type: 'GET',
         error: function () {
             // remove the token from localStorage and redirect to the auth state
@@ -50,6 +53,7 @@ angular.module('scotchApp')
         })
         .withDOM('frtip')
         .withPaginationType('full_numbers')
+        
         // Active Buttons extension
         .withButtons([
             'columnsToggle',
@@ -78,6 +82,7 @@ angular.module('scotchApp')
         DTColumnBuilder.newColumn('kelas.kelas').withTitle('Kelas'),
         DTColumnBuilder.newColumn('kelas.dosen1.nama_dosen').withTitle('Dosen'),
         DTColumnBuilder.newColumn('kelas.sks').withTitle('SKS'),
+        DTColumnBuilder.newColumn('kelas.matakuliah.semester').withTitle('Semester'),
         DTColumnBuilder.newColumn('kelas').withTitle('Kuota')
         .renderWith(function(kelas, type, full, meta) {
             return '<label id="'+kelas.id_kelas+'">'+kelas.kapasitas_kelas+'</label>';
@@ -101,14 +106,77 @@ angular.module('scotchApp')
         console.log(selectedItems);
         if(document.getElementById('P'+selectedItems).checked){
             console.log('checked');
-            hubConnection.invoke('UpdateKapasitas',selectedItems,true);
+
+            var krs = {
+                npm: selectedItems,
+                id_kelas: $localStorage.currentUser.username
+              };
+              let axiosConfig = {
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    "Authorization" : "Bearer "+$localStorage.currentUser.token,
+                    "Access-Control-Allow-Origin": "*",
+                }
+              };
+             axios.post('http://127.0.0.1:34564/api/ambilkrs', krs, axiosConfig)  
+             .then((result) => {
+             console.log("RESPONSE RECEIVED: ", result);
+             hubConnection.invoke('UpdateKapasitas',selectedItems,true);
+             })
+             .catch((result) => {
+             console.log("AXIOS ERROR: ", result);
+             });
+            
         }
         else
         {
             console.log('Unchecked');
-            hubConnection.invoke('UpdateKapasitas',selectedItems,false);
+              var krs = {
+                npm: selectedItems,
+                id_kelas: $localStorage.currentUser.username
+              };
+              let axiosConfig = {
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    "Authorization" : "Bearer "+$localStorage.currentUser.token,
+                    "Access-Control-Allow-Origin": "*",
+                }
+              };
+             axios.post('http://127.0.0.1:34564/api/batalkrs', krs, axiosConfig)  
+             .then((result) => {
+             console.log("RESPONSE RECEIVED: ", result);
+             hubConnection.invoke('UpdateKapasitas',selectedItems,false);
+             })
+             .catch((result) => {
+             console.log("AXIOS ERROR: ", result);
+             });
         }
         
+    }
+    function setdatamhs () {
+
+        axios.get(
+            'http://127.0.0.1:34562/api/Mahasiswa/data/'+$localStorage.currentUser.username,
+            {headers: {
+                "Authorization" : "Bearer "+$localStorage.currentUser.token,
+                "Access-Control-Allow-Origin": "*",
+              }
+            }
+          )
+          .then((response) => {
+            console.log(response);
+            document.getElementById("nama").innerHTML = response.data.indukmhs.namamhs;
+            document.getElementById("npm").innerHTML = response.data.npm;
+            document.getElementById("fakultas").innerHTML = response.data.fakultas.fakultas;
+            document.getElementById("prodi").innerHTML = response.data.prodi.prodi;
+            foto=response.data.fotomhs.foto;
+            $("#foto").attr("src","data:image/jpeg;base64,"+foto);
+            console.log(foto);
+            },
+            (error) => {
+                console.log(error);
+            }
+          );
     }
     
     
